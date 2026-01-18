@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>英特尔志愿者爱心工程 活动登记</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="card">
+        <h1>英特尔志愿者爱心工程 活动登记</h1>
+        <p class="notice">提交后需管理员审核，审核通过后才计入统计。</p>
+        <form id="volunteer-form" class="form">
+          <label class="field">
+            <span>工号</span>
+            <input type="text" name="employee_id" required placeholder="请输入工号" />
+          </label>
+          <label class="field">
+            <span>姓名</span>
+            <input type="text" name="name" required placeholder="请输入姓名" />
+          </label>
+          <div class="field">
+            <span>提交方式</span>
+            <div class="option-group">
+              <label class="option-item">
+                <input type="radio" name="submission_mode" value="append" />
+                <span>追加（保留此前活动并更新当前选择）</span>
+              </label>
+              <label class="option-item">
+                <input type="radio" name="submission_mode" value="reset" checked />
+                <span>重置（删除旧记录再写入本次选择）</span>
+              </label>
+            </div>
+          </div>
+          <label class="field">
+            <span>志愿者活动（可多选）</span>
+            <select id="activity-select" name="activity_ids" multiple required></select>
+            <small class="help">按住 Ctrl 或 ⌘ 可多选。</small>
+          </label>
+          <button class="btn primary" type="submit">提交登记</button>
+        </form>
+        <p id="form-message" class="message"></p>
+      </section>
+      <footer class="footer">v0.1</footer>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

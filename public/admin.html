@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>志愿者活动登记 - 管理后台</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <section class="card" id="login-card">
+        <h1>管理员登录</h1>
+        <label class="field">
+          <span>管理员密码</span>
+          <input type="password" id="admin-password" placeholder="请输入密码" />
+        </label>
+        <button class="btn primary" id="login-btn">登录</button>
+        <p id="login-message" class="message"></p>
+      </section>
+
+      <section class="dashboard" id="dashboard" hidden>
+        <header class="card">
+          <h2>统计概览</h2>
+          <div class="stats">
+            <div class="stat-card">
+              <span class="stat-label">总志愿者人数</span>
+              <span id="stat-volunteers" class="stat-value">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">总人次数</span>
+              <span id="stat-participations" class="stat-value">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">总时长(分钟)</span>
+              <span id="stat-minutes" class="stat-value">0</span>
+            </div>
+          </div>
+          <canvas id="stats-chart" height="120"></canvas>
+        </header>
+
+        <section class="card">
+          <div class="section-header">
+            <h2>用户审核</h2>
+            <select id="user-status-filter" class="select">
+              <option value="pending">待审核</option>
+              <option value="approved">已批准</option>
+              <option value="rejected">已驳回</option>
+            </select>
+          </div>
+          <table class="table" id="users-table">
+            <thead>
+              <tr>
+                <th>工号</th>
+                <th>姓名</th>
+                <th>注册时间</th>
+                <th>登记数</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+
+        <section class="card">
+          <h2>活动管理</h2>
+          <form id="activity-form" class="form inline">
+            <input type="text" name="name" placeholder="活动名称" required />
+            <input type="number" name="duration_minutes" placeholder="时长(分钟)" min="1" required />
+            <button class="btn primary" type="submit">新增活动</button>
+          </form>
+          <table class="table" id="activities-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>时长(分钟)</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+
+        <section class="card">
+          <div class="section-header">
+            <h2>登记记录</h2>
+            <div class="actions">
+              <select id="submission-status-filter" class="select">
+                <option value="all">全部</option>
+                <option value="pending">待审核</option>
+                <option value="approved">已批准</option>
+                <option value="rejected">已驳回</option>
+              </select>
+              <button class="btn" id="refresh-submissions">刷新</button>
+              <button class="btn" id="export-csv">导出 CSV</button>
+              <button class="btn danger" id="reset-data">数据初始化</button>
+            </div>
+          </div>
+          <table class="table" id="submissions-table">
+            <thead>
+              <tr>
+                <th>工号</th>
+                <th>姓名</th>
+                <th>状态</th>
+                <th>活动</th>
+                <th>时长(分钟)</th>
+                <th>更新时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+
+        <section class="card">
+          <h2>个人累计时长</h2>
+          <table class="table" id="per-person-table">
+            <thead>
+              <tr>
+                <th>工号</th>
+                <th>姓名</th>
+                <th>累计时长(分钟)</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+      </section>
+    </main>
+    <script src="admin.js"></script>
+  </body>
+</html>
